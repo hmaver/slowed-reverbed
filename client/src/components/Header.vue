@@ -12,6 +12,9 @@
 
     <v-spacer>    </v-spacer>
         <v-toolbar-items>
+            <v-btn flat dark router to ="search">
+                Slowed & Reverbed
+            </v-btn>
 
             <v-btn flat dark router to ="login">
                 Log In

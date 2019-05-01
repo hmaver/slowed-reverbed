@@ -2,6 +2,18 @@ const {User} = require('../models')
 var funcy = require('../test')
 
 module.exports = {
+    async search (req,res) {
+        try {
+            const {link} = await req.body
+            funcy.mySpecialFunc(link)
+        } catch (err) {
+            res.status(400).send({
+                error: 'nope'
+            })
+        }
+
+    },
+
     async register (req,res) {
     try {
         // funcy.mySpecialFunc()
@@ -18,13 +30,14 @@ module.exports = {
     async login (req,res) {
     try {
         const {email, password} = req.body
-        funcy.mySpecialFunc()
 
         const user = await User.findOne({    
             where: {
                 email: email
             }
         })
+
+
         if (!user) {
             return res.status(403).send({
                 error: 'The login information was incorrect'
@@ -37,6 +50,9 @@ module.exports = {
                 error: 'The login info is incorrect'
             })
         }
+        // if (user && isPasswordValid) {
+        //     funcy.mySpecialFunc('https://www.youtube.com/watch?v=CWpINHG3928')
+        // }
         const userJson = user.toJSON()
         res.send({
             user:userJson

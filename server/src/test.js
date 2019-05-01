@@ -2,10 +2,11 @@
 const readlLine = require('readline')
 var exec = require('child_process').exec;
 var pathtoSH = "/Users/averion/Downloads/SOX-DEMO/player.sh";
+// var givenLink = 
 
 // exec('command', function (error, stdout, stderr) {});
 // exec(pathtoSH 'testing, https://www.youtube.com/watch?v=6W1ajuerl6o, 80, 0.8, 0.9');
-var test =" testing https://www.youtube.com/watch?v=6W1ajuerl6o 80 0.8 0.9";
+// var test =" testing https://www.youtube.com/watch?v=6W1ajuerl6o 80 0.8 0.9";
 
 
 // FILE_NAME=$1
@@ -16,12 +17,14 @@ var test =" testing https://www.youtube.com/watch?v=6W1ajuerl6o 80 0.8 0.9";
 
 
 var filename = 'bl';
-var link = "https://www.youtube.com/watch?v=dVuxHnczNFc"
+var givenLink = "https://www.youtube.com/watch?v=j4FL7CMustE"
+// var myLink = link;
 var reverb = 2;
 var tempo = 0.85;
 var pitch = -200;
 
-function mySpecialFunc() {
+function mySpecialFunc(givenLink) {
+  var link = givenLink;
   exec('~/Downloads/sox-demo/player.sh' + " " + filename + " " + link + " " + reverb + " " + tempo + " " + pitch, 
   function (error, stdout, stderr) {
       console.log('stdout: ' + stdout);
@@ -32,4 +35,4 @@ function mySpecialFunc() {
   });
 }
 
-module.exports.mySpecialFunc = mySpecialFunc;
+module.exports.mySpecialFunc= mySpecialFunc;
