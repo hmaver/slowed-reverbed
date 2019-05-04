@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar fixed class="red">
+    <v-toolbar fixed class="orange">
     <v-toolbar-title class="mr-4">
         Slowed and Reverbed
     </v-toolbar-title>
@@ -13,7 +13,7 @@
     <v-spacer>    </v-spacer>
         <v-toolbar-items>
             <v-btn flat dark router to ="search">
-                Slowed & Reverbed
+                Slow Down Time
             </v-btn>
 
             <v-btn flat dark router to ="login">

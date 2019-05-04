@@ -4,8 +4,9 @@ var funcy = require('../test')
 module.exports = {
     async search (req,res) {
         try {
-            const {link} = await req.body
-            funcy.mySpecialFunc(link)
+            const {link,pitch,tempo,reverb} = await req.body
+            funcy.mySpecialFunc(link,pitch,tempo,reverb)
+            res.download('../server/bl.wav', 'result.wav');
         } catch (err) {
             res.status(400).send({
                 error: 'nope'
