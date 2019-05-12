@@ -54,18 +54,28 @@
   </v-card>
    <br>
      <div class="error" v-html="error" />
-      <button @click="search" class="button"> Slow it down!
+      <button @click="search" class="button"> Create Audio File
       </button>
+      <br>
+      <button @click="player()" class="button"> Preview in New Tab
+      </button>
+      
+        <!-- <button @click="pause" class="button"> Stop Preview
+      </button> -->
+      
     </div>
       </div>
+
     </v-flex>
   </v-layout>
   </v-container>
+
   
 </template>
 
 <script>
 import SearchService from '@/services/SearchService'
+
 export default {
   data () {
     return { 
@@ -88,10 +98,11 @@ export default {
       } catch (error) {
         this.error = error.response.data.error
       }
-        }
-      
-
+        }, 
+     player: function () {   
+          window.open("#player");  
   }
+}
 }
 </script>
 

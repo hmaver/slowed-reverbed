@@ -16,13 +16,17 @@
                 Slow Down Time
             </v-btn>
 
+            <v-btn flat dark router to ="player">
+                Player
+            </v-btn>
             <v-btn flat dark router to ="login">
                 Log In
             </v-btn>
 
-            <v-btn flat dark router to ="register">
+            <v-btn flat dark router to ="/">
                 Sign Up
             </v-btn>
+
 
         </v-toolbar-items>
         

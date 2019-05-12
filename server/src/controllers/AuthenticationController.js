@@ -6,7 +6,8 @@ module.exports = {
         try {
             const {link,pitch,tempo,reverb} = await req.body
             funcy.mySpecialFunc(link,pitch,tempo,reverb)
-            res.download('../server/bl.wav', 'result.wav');
+            // res.download('../server/bl.wav', 'result.wav');
+
         } catch (err) {
             res.status(400).send({
                 error: 'nope'
