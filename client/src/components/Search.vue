@@ -48,10 +48,22 @@
         step="0.5"
         min="0"
         max="10"
-                thumb-color="orange"
+        thumb-color="orange"
       ></v-slider>   
     </v-card-text>
   </v-card>
+  <v-container fluid>
+    <v-row align="center">
+      <v-col class="d-flex" cols="12" sm="6">
+        <v-select
+          v-model="outputType"
+          :items="items"
+          label="Select output type you want to download"
+        ></v-select>
+      </v-col>
+    </v-row>
+  </v-container>
+      
    <br>
      <div class="error" v-html="error" />
       <button @click="search" class="button"> Create Audio File
@@ -75,17 +87,28 @@
 
 <script>
 import SearchService from '@/services/SearchService'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+
 
 export default {
   data () {
+    if (outputType.items == 'mp3') {
+      this.outputType = mp3;
+    } else {
+      this.outputType = wav;
+    }
     return { 
       link:'',
       pitch: -300,
       tempo: '',
       reverb: '',
+      outputType: '',
       error: null
     }
   },
+  data: () => ({
+    items: ['mp3', 'wav'],
+  }),
   methods: {
     async search () {
       try{
@@ -93,7 +116,8 @@ export default {
             link: this.link,
             pitch: this.pitch,
             tempo: this.tempo,
-            reverb: this.reverb
+            reverb: this.reverb,
+            outputType: this.outputType
           })
       } catch (error) {
         this.error = error.response.data.error
