@@ -22,6 +22,7 @@ app.use(morgan('')) //shows what hit us
 app.use(bodyParser.json())
 app.use(cors())
 
+
 // GET, POST, PATCH, PUT, DELETE
 //endpoint
 // app.get('/register', (req, res) => {

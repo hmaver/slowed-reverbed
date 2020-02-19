@@ -11,4 +11,7 @@ module.exports = (app) => {
 
     app.post('/search',
     AuthenticationController.search)
+
+    app.post('/updateURL',
+    AuthenticationController.updateURL)
 }

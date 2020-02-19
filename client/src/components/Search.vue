@@ -5,7 +5,9 @@
     <v-flex xs2>
       <div class="white elevation-2">
         <v-toolbar flat dark class="orange">
+          
         <v-toolbar-title>Search and Play</v-toolbar-title>
+
         </v-toolbar>
          
     <div class ="pl-4 pr-4 pt-2 pb-2">
@@ -66,32 +68,40 @@
       
    <br>
      <div class="error" v-html="error" />
-      <button @click="search" class="button"> Create Audio File
+      <button @click="search(); playAudio();" class="button"> Create Audio File
       </button>
+    <v-container>
+    <!-- <audio controls style="/* margin-left: auto; */color: orange;padding: 5px;margin-left: 418px;">
+      <source src= '../../../server/output.mp3' type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio> -->
+    </v-container>
       <br>
       <button @click="player()" class="button"> Preview in New Tab
       </button>
       
         <!-- <button @click="pause" class="button"> Stop Preview
       </button> -->
-      
+
     </div>
       </div>
 
     </v-flex>
   </v-layout>
   </v-container>
-
   
 </template>
 
 <script>
 import SearchService from '@/services/SearchService'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import Player from '@/components/Player.vue'
 
+// var url = '../../../server/output.mp3';
 
 export default {
   data () {
+    
     if (outputType.items == 'mp3') {
       this.outputType = mp3;
     } else {
@@ -99,11 +109,12 @@ export default {
     }
     return { 
       link:'',
-      pitch: -300,
+      pitch: '',
       tempo: '',
       reverb: '',
       outputType: '',
-      error: null
+      error: null,
+      url:''
     }
   },
   data: () => ({
@@ -117,16 +128,25 @@ export default {
             pitch: this.pitch,
             tempo: this.tempo,
             reverb: this.reverb,
-            outputType: this.outputType
+            output: this.outputType
           })
       } catch (error) {
         this.error = error.response.data.error
       }
         }, 
      player: function () {   
-          window.open("#player");  
+          window.open("#player");
+  },
+        playAudio: function() {
+        var audio = new Audio(url)+ new Date().getTime();
+        this.url = audio;
+        this.$forceUpdate();
   }
-}
+
+},
+props: {
+  outputType: String
+  }
 }
 </script>
 
