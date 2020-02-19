@@ -1,7 +1,7 @@
 <template>
 
-<audio controls>
-    <source src="../../../server/output.mp3" type="audio/mp3">
+<audio controls class="overflow">
+    <source class="overflow" src="../../../server/output.mp3" type="audio/mp3">
     Your browser does not support the audio element.
 </audio>
 
@@ -15,5 +15,5 @@ export default {
 </script>
   
 <style>
-
+.overflow { overflow: hidden;}
 </style>

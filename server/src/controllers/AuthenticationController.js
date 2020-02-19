@@ -16,15 +16,14 @@ module.exports = {
 
     },
 
-    async updateURL(req,res) {
-        try {
-            var url ='../../../server/'+ await req.body;
-            var audio = new Audio(url)+ new Date().getTime();
-            audio.load();
-            audio.play();
-        }
+    // async updateURL(req,res) {
+    //     try {
+    //         var url ='../../../server/'+ await req.body;
+    //         var audio = new Audio(url)+ new Date().getTime();
+    //         audio.load();
+    //         audio.play();
 
-    },
+    // },
 
     async register (req,res) {
     try {

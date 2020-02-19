@@ -10,6 +10,20 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.config.productionTip = false
 
+const state = new Vue({
+
+  data (){
+      return {
+  link:'',
+  pitch: '',
+  tempo: '',
+  reverb: '',
+  outputType: '',
+  error: null,
+  url:''
+  }
+  },});
+
 Vue.use(Vuetify, {
   iconfont: 'md'
 })
@@ -18,5 +32,8 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+    data: {
+    name: ''
+  }
 })

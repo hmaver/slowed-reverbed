@@ -5,44 +5,70 @@
     <v-flex xs2>
       <div class="white elevation-2">
         <v-toolbar flat dark class="orange">
-          
         <v-toolbar-title>Search and Play</v-toolbar-title>
-
+        <!-- <vue-audio :file="file1"> </vue-audio> -->
         </v-toolbar>
          
     <div class ="pl-4 pr-4 pt-2 pb-2">
         <v-flex xs12 >
-          <v-text-field
-            label="Youtube Link"
-             v-model="link"
-          ></v-text-field>
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+              <v-text-field v-on="on"
+                label="Music Link"
+                v-model="link"
+              ></v-text-field>
+            </template>
+            <span> Copy & paste any Youtube or SoundCloud link here </span>
+          </v-tooltip>
         </v-flex>
   <br>
 <v-card>
     <v-card-text>
-          <v-subheader>Pitch</v-subheader>
-      <v-slider
-        v-model="pitch"
-        step="10"
-        thumb-label
-        ticks     
-           thumb-color="orange"
-        min="-300"
-        max="0"
-      ></v-slider>
+
+    <v-subheader>Pitch</v-subheader>
+
+
+    <v-tooltip top>
+      <template v-slot:activator ="{ on }">
+        <v-card v-on="on" style="padding: 16px">
+        <v-slider
+          v-model="pitch"
+          step="10"
+          thumb-label
+          ticks     
+          thumb-color="orange"
+          min="-300"
+          max="0"
+        ></v-slider>
+        </v-card>
+      </template>
+          <span>The lower the pitch, the lower the notes in the song will sound.</span>
+        </v-tooltip>
+
 
       <v-subheader>Tempo</v-subheader>
+      <v-tooltip top>
+      <template v-slot:activator ="{ on }">
+      <v-card v-on="on" style="padding: 16px">
       <v-slider
         v-model="tempo"
         thumb-label
         ticks
         step="0.05"
         min="0.5"
-        max="1"
+        max="1.25"
         thumb-color="orange"
       ></v-slider>      
+        </v-card>
+      </template>
+          <span>The higher the tempo is, the faster the song will be</span>
+        </v-tooltip>
+
 
       <v-subheader>Reverb</v-subheader>
+      <v-tooltip top>
+      <template v-slot:activator ="{ on }">
+      <v-card v-on="on" style="padding: 16px">
       <v-slider
         v-model="reverb"
         thumb-label
@@ -52,6 +78,10 @@
         max="10"
         thumb-color="orange"
       ></v-slider>   
+      </v-card>
+      </template>
+          <span>The higher the reverb, the more echo-y it will sound.</span>
+        </v-tooltip>
     </v-card-text>
   </v-card>
   <v-container fluid>
@@ -71,10 +101,10 @@
       <button @click="search(); playAudio();" class="button"> Create Audio File
       </button>
     <v-container>
-    <!-- <audio controls style="/* margin-left: auto; */color: orange;padding: 5px;margin-left: 418px;">
+    <audio controls style="/* margin-left: auto; */color: orange;padding: 5px;margin-left: 418px;">
       <source src= '../../../server/output.mp3' type="audio/mp3">
       Your browser does not support the audio element.
-    </audio> -->
+    </audio>
     </v-container>
       <br>
       <button @click="player()" class="button"> Preview in New Tab
@@ -93,13 +123,18 @@
 </template>
 
 <script>
+import saveState from 'vue-save-state'
 import SearchService from '@/services/SearchService'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Player from '@/components/Player.vue'
+// import VueAudio from 'vue-audio'
 
 // var url = '../../../server/output.mp3';
 
+
+
 export default {
+  mixins: [saveState],
   data () {
     
     if (outputType.items == 'mp3') {
@@ -114,7 +149,9 @@ export default {
       reverb: '',
       outputType: '',
       error: null,
-      url:''
+      url:'',
+      file1:'../../../server/output.mp3',
+      file2:'../../../server/output.mp3'
     }
   },
   data: () => ({
@@ -133,6 +170,11 @@ export default {
       } catch (error) {
         this.error = error.response.data.error
       }
+      state.link = this.link,
+      state.pitch = this.pitch,
+      state.tempo = this.tempo,
+      state.reverb = this.reverb,
+      state.outputType = this.outputType
         }, 
      player: function () {   
           window.open("#player");
@@ -141,7 +183,12 @@ export default {
         var audio = new Audio(url)+ new Date().getTime();
         this.url = audio;
         this.$forceUpdate();
-  }
+  },
+      getSaveStateConfig: function(){
+        return {
+          'cacheKey': 'Search',
+        };
+      }
 
 },
 props: {
